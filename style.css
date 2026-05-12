@@ -1,0 +1,135 @@
+/* --- CURSOR REMOVAL --- */
+/* Hide the default browser cursor on desktop to prioritize the custom interactive cursor */
+@media (min-width: 769px) {
+    html, body, a, button, .cursor-hover-scale {
+        cursor: none !important;
+    }
+}
+
+/* --- VISUAL DEPTH --- */
+/* Adds layered shadows to text to make it readable over the animated background */
+.text-depth {
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Deeper shadow for dark mode to enhance the "glowing" effect of the brand color */
+.dark .text-depth {
+    text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* --- CUSTOM CURSOR STYLING --- */
+#cursor-dot,
+#cursor-outline {
+    pointer-events: none; /* Prevents the cursor elements from blocking mouse clicks */
+    z-index: 9999;        /* Keeps the cursor on top of all other elements */
+    transition: transform 0.1s ease-out, opacity 0.3s ease;
+}
+
+/* Restore default cursor on mobile/tablets where touch interaction is used */
+@media (max-width: 768px) {
+    #cursor-dot, #cursor-outline {
+        display: none !important;
+    }
+}
+
+/* --- REVEAL ANIMATION --- */
+/* Initial state: Hidden, pushed down, and blurred */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    filter: blur(15px);
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Final state: Visible, moved to original position, and sharp */
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+/* Transition for smooth background color shifts when toggling Dark/Light mode */
+body {
+    transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1), color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- ROADMAP UI ENHANCEMENTS --- */
+/* Styling for the Roadmap section cards to give them high-contrast elevation */
+#roadmap .glass-ui {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05); /* Light mode shadow */
+}
+
+.dark #roadmap .glass-ui {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); /* Dark mode shadow */
+}
+
+/* Center the vertical timeline spine exactly on its anchor point */
+#roadmap .absolute.left-0 {
+    transform: translateX(-50%);
+}
+
+/* --- ENHANCED GLASS MORPHISM --- */
+/* Uses backdrop-filter to blur whatever is behind the element, creating a "frosted glass" effect */
+.glass-ui {
+    backdrop-filter: blur(16px) saturate(180%);
+    background: rgba(255, 255, 255, 0.75); /* Semi-transparent white */
+    border: 1px solid rgba(209, 213, 219, 0.4);
+}
+
+/* Adjusted glass effect for dark mode to look sleek and modern */
+.dark .glass-ui {
+    background: rgba(15, 15, 20, 0.75); /* Deep zinc-black with transparency */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- INTERACTIVE BUTTONS (SOCIAL PILLS) --- */
+.social-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    font-family: 'Fira Code', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+}
+
+/* --- CUSTOM UNDERLINE --- */
+/* Creates a thick, decorative brand-colored underline behind specific words */
+.underline-brand {
+    position: relative;
+    display: inline-block;
+}
+
+.underline-brand::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+    width: 100%;
+    height: 6px;
+    background: #6366f1; /* Brand color */
+    opacity: 0.4;
+    z-index: -1; /* Places underline behind the text */
+}
+
+/* --- THE KILL EFFECT --- */
+.kill-effect {
+    color: #ef4444; /* High-contrast red */
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+    text-decoration-color: #ef4444;
+    font-style: italic;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.kill-effect:hover {
+    opacity: 1;
+    /* Red glow effect on hover */
+    text-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
+}
